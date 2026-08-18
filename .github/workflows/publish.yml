@@ -27,4 +27,14 @@ jobs:
         run: node -e "const version=require('./package.json').version; if (process.env.GITHUB_REF_NAME !== 'v' + version) throw new Error('Tag must be v' + version)"
       - run: pnpm check
       - run: pnpm e2e
-      - run: npm publish --access public
+      - name: Check whether this version is already published
+        id: npm-version
+        run: |
+          spec=$(node -p "const pkg=require('./package.json'); pkg.name + '@' + pkg.version")
+          if npm view "$spec" version --registry https://registry.npmjs.org/ >/dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.npm-version.outputs.published != 'true'
+        run: npm publish --access public
