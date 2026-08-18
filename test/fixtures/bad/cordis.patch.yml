@@ -1,0 +1,4 @@
+- insert:
+    - name: ../unsafe.js
+      disabled: false
+      other: !!js process.env.UNSAFE

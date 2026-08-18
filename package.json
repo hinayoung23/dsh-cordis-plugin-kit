@@ -1,0 +1,73 @@
+{
+  "name": "dsh-cordis-plugin-kit",
+  "version": "0.1.0",
+  "description": "Offline standards, scaffolding, quality checks, runtime debugging, and performance gates for Cordis plugins in DeepSeek Harness.",
+  "author": "hinayoung23",
+  "packageManager": "pnpm@11.13.1",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "bin": {
+    "dsh-cordis-kit": "./bin/dsh-cordis-kit.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./checker": "./lib/checker.js",
+    "./standards": "./lib/standards.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "runner",
+    "cordis-kit.json",
+    "index.js",
+    "index.d.ts",
+    "cordis.patch.yml",
+    "STANDARDS.zh-CN.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node --check index.js && node --check bin/dsh-cordis-kit.js && node --test test/*.test.js",
+    "e2e": "node test/e2e.js"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "cordis",
+    "plugin-development",
+    "plugin-validator",
+    "scaffolding",
+    "security",
+    "performance"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hinayoung23/dsh-cordis-plugin-kit.git"
+  },
+  "homepage": "https://github.com/hinayoung23/dsh-cordis-plugin-kit#readme",
+  "bugs": {
+    "url": "https://github.com/hinayoung23/dsh-cordis-plugin-kit/issues"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  }
+}

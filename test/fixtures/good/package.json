@@ -1,0 +1,16 @@
+{
+  "name": "fixture-good-cordis-plugin",
+  "version": "0.1.0",
+  "description": "A valid fixture.",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "cordis.patch.yml", "README.md", "LICENSE"],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node --check index.js"
+  },
+  "engines": { "node": ">=22" },
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/example/fixture-good-cordis-plugin.git" },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

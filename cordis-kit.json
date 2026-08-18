@@ -1,0 +1,16 @@
+{
+  "entry": "./index.js",
+  "config": {},
+  "provide": [],
+  "analysis": {
+    "ignore": [
+      "test/fixtures/**"
+    ]
+  },
+  "performance": {
+    "iterations": 30,
+    "maxApplyP95Ms": 50,
+    "maxDisposeP95Ms": 50,
+    "maxHeapGrowthKb": 2048
+  }
+}

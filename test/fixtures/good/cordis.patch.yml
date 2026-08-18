@@ -1,0 +1,3 @@
+- insert:
+    - id: fixture-good
+      name: fixture-good-cordis-plugin
