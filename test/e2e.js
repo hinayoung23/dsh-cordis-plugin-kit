@@ -13,7 +13,8 @@ const target = path.join(parent, 'generated-plugin')
 
 function verifyLiveWatcher(root) {
   return new Promise((resolve, reject) => {
-    const child = spawn('pnpm', ['dev'], { cwd: root, shell: false, stdio: ['ignore', 'pipe', 'pipe'] })
+    const command = path.join(root, 'node_modules', '.bin', 'dsh-cordis-kit')
+    const child = spawn(command, ['watch', '.'], { cwd: root, shell: false, stdio: ['ignore', 'pipe', 'pipe'] })
     let output = ''
     let changed = false
     const timer = setTimeout(() => {
