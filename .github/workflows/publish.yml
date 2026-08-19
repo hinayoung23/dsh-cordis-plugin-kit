@@ -25,7 +25,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Verify tag matches package version
         run: node -e "const version=require('./package.json').version; if (process.env.GITHUB_REF_NAME !== 'v' + version) throw new Error('Tag must be v' + version)"
-      - run: pnpm check
+      - run: pnpm quality:ci
       - run: pnpm e2e
       - name: Check whether this version is already published
         id: npm-version

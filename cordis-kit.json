@@ -2,6 +2,11 @@
   "entry": "./index.js",
   "config": {},
   "provide": [],
+  "automation": {
+    "mode": "balanced",
+    "debounceMs": 800,
+    "ci": "github"
+  },
   "analysis": {
     "ignore": [
       "test/fixtures/**"

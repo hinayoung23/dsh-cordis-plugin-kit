@@ -1,0 +1,2 @@
+#!/bin/sh
+exec node bin/dsh-cordis-kit.js checkpoint pre-push .

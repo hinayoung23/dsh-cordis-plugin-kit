@@ -14,5 +14,5 @@ test('offline standard has unique stable rule ids and defensive copies', () => {
 
 test('standard covers Cordis-specific lifecycle, injection, events and config', () => {
   const ids = new Set(getStandards().map(rule => rule.id))
-  for (const id of ['CRD003', 'CRD006', 'CRD008', 'CRD011', 'CRD012', 'CRD013']) assert.equal(ids.has(id), true)
+  for (const id of ['CRD003', 'CRD006', 'CRD008', 'CRD011', 'CRD012', 'CRD013', 'AUT001', 'AUT002']) assert.equal(ids.has(id), true)
 })

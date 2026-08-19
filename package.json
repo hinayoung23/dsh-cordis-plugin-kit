@@ -1,7 +1,7 @@
 {
   "name": "dsh-cordis-plugin-kit",
-  "version": "0.1.0",
-  "description": "Offline standards, scaffolding, quality checks, runtime debugging, and performance gates for Cordis plugins in DeepSeek Harness.",
+  "version": "0.2.0",
+  "description": "Event-driven development automation, offline standards, CI adapters, and quality gates for Cordis plugins in DeepSeek Harness.",
   "author": "hinayoung23",
   "packageManager": "pnpm@11.13.1",
   "type": "module",
@@ -15,8 +15,22 @@
       "types": "./index.d.ts",
       "import": "./index.js"
     },
-    "./checker": "./lib/checker.js",
-    "./standards": "./lib/standards.js",
+    "./checker": {
+      "types": "./lib/checker.d.ts",
+      "import": "./lib/checker.js"
+    },
+    "./ci": {
+      "types": "./lib/ci.d.ts",
+      "import": "./lib/ci.js"
+    },
+    "./quality": {
+      "types": "./lib/quality.d.ts",
+      "import": "./lib/quality.js"
+    },
+    "./standards": {
+      "types": "./lib/standards.d.ts",
+      "import": "./lib/standards.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -34,7 +48,13 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "check": "node --check index.js && node --check bin/dsh-cordis-kit.js && node --test test/*.test.js",
-    "e2e": "node test/e2e.js"
+    "dev": "node bin/dsh-cordis-kit.js watch .",
+    "quality:save": "node bin/dsh-cordis-kit.js checkpoint save .",
+    "quality:commit": "node bin/dsh-cordis-kit.js checkpoint pre-commit .",
+    "quality:push": "node bin/dsh-cordis-kit.js checkpoint pre-push .",
+    "e2e": "node test/e2e.js",
+    "quality:ci": "node bin/dsh-cordis-kit.js ci .",
+    "prepack": "node bin/dsh-cordis-kit.js checkpoint release . --skip-package"
   },
   "keywords": [
     "deepseek-harness",

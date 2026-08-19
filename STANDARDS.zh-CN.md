@@ -52,6 +52,11 @@
 - `PERF002`：高频定时器、缓存和并发具备配置上限与背压。
 - `PERF003`：重复 apply/dispose，按 p95 延迟和堆增长预算阻断回归。
 
-## 6. 校验边界
+## 6. 自动化与 CI
+
+- `AUT001`：`balanced` 模式具备保存检查、`pre-commit`、`pre-push`、`prepack` 和代理交付指令；保存阶段只做静态检查，不执行目标插件代码。
+- `AUT002`：GitHub、GitLab、Gitee 和通用流水线调用同一个 `dsh-cordis-kit ci` 核心，并使用一致的退出码、JSON、JUnit、SARIF 与 Markdown 报告。
+
+## 7. 校验边界
 
 静态规则采用保守模式，可能存在误报；动态 smoke/perf 使用测试替身，不能替代真实 provider 集成测试。涉及鉴权、资金、隐私、任意文件访问或进程执行的插件必须增加业务级威胁模型、权限测试和人工代码审查。

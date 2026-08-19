@@ -17,6 +17,7 @@ test('DSH plugin provides the kit service through a lifecycle-owned registration
   assert.equal(name, 'dsh-cordis-plugin-kit')
   assert.equal(services.get('cordisPluginKit').version, '2026.08')
   assert.equal(typeof services.get('cordisPluginKit').check, 'function')
+  assert.equal(typeof services.get('cordisPluginKit').quality, 'function')
   for (const dispose of disposers.reverse()) await dispose()
   assert.equal(services.size, 0)
 })
