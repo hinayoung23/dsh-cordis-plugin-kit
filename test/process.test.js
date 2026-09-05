@@ -26,9 +26,9 @@ test('npm executes tests and package checks in a Unicode path with spaces', asyn
   const root = await mkdtemp(path.join(os.tmpdir(), 'cordis 中文 space-'))
   t.after(() => rm(root, { recursive: true, force: true }))
   await writeFile(path.join(root, 'package.json'), JSON.stringify({
-    name: 'cordis-process-fixture', version: '1.0.0', scripts: { test: 'node test.cjs' },
+    name: 'cordis-process-fixture', version: '1.0.0', scripts: { test: 'node --test test.cjs' },
   }))
-  await writeFile(path.join(root, 'test.cjs'), 'console.log("process-fixture-ok")\n')
+  await writeFile(path.join(root, 'test.cjs'), 'require("node:test")("child test actually executes", () => console.log("process-fixture-ok"))\n')
   const tested = await runChild('npm', ['test'], { cwd: root })
   assert.equal(tested.code, 0, tested.output)
   assert.match(tested.output, /process-fixture-ok/)

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { cp, mkdir, mkdtemp, readFile, rm, symlink } from 'node:fs/promises'
+import { cp, mkdir, mkdtemp, readFile, realpath, rm, symlink } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
@@ -14,8 +14,10 @@ async function fixture(t) {
   t.after(() => rm(parent, { recursive: true, force: true }))
   const root = path.join(parent, 'plugin')
   await cp(goodFixture, root, { recursive: true })
-  await mkdir(path.join(root, 'node_modules'), { recursive: true })
-  await symlink(path.join(kitRoot, 'node_modules/@deepseek-ai'), path.join(root, 'node_modules/@deepseek-ai'), 'junction')
+  await mkdir(path.join(root, 'node_modules/@deepseek-ai'), { recursive: true })
+  // Resolve pnpm's package link before crossing a Windows volume boundary.
+  const cordis = await realpath(path.join(kitRoot, 'node_modules/@deepseek-ai/cordis'))
+  await symlink(cordis, path.join(root, 'node_modules/@deepseek-ai/cordis'), 'junction')
   return root
 }
 
