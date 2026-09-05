@@ -52,6 +52,6 @@ test('CI setup rejects a directory symlink that escapes the project', async t =>
   const root = await mkdtemp(path.join(os.tmpdir(), 'dsh-cordis-ci-'))
   const outside = await mkdtemp(path.join(os.tmpdir(), 'dsh-cordis-ci-outside-'))
   t.after(() => Promise.all([rm(root, { recursive: true, force: true }), rm(outside, { recursive: true, force: true })]))
-  await symlink(outside, path.join(root, '.github'), 'dir')
+  await symlink(outside, path.join(root, '.github'), 'junction')
   await assert.rejects(setupCi(root, 'github'), /符号链接越出项目/)
 })

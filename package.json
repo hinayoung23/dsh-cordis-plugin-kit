@@ -1,6 +1,6 @@
 {
   "name": "dsh-cordis-plugin-kit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Event-driven development automation, offline standards, CI adapters, and quality gates for Cordis plugins in DeepSeek Harness.",
   "author": "hinayoung23",
   "packageManager": "pnpm@11.13.1",
@@ -88,6 +88,6 @@
     }
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "^4.0.1"
+    "@deepseek-ai/cordis": "^4.0.2"
   }
 }

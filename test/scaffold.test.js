@@ -16,7 +16,7 @@ test('scaffolder creates a strict-clean DSH Cordis project', async t => {
   assert.match(await readFile(path.join(target, 'cordis.patch.yml'), 'utf8'), /name: sample-cordis-plugin/)
   assert.match(await readFile(path.join(target, 'AGENTS.md'), 'utf8'), /checkpoint pre-push/)
   assert.match(await readFile(path.join(target, '.github/workflows/cordis-quality.yml'), 'utf8'), /pnpm exec dsh-cordis-kit ci/)
-  assert.ok((await stat(path.join(target, '.githooks/pre-commit'))).mode & 0o100)
+  if (process.platform !== 'win32') assert.ok((await stat(path.join(target, '.githooks/pre-commit'))).mode & 0o100)
   assert.equal(result.automation.hookPathConfigured, true)
   const report = await checkProject(target, { strict: true })
   assert.equal(report.passed, true, JSON.stringify(report.diagnostics, null, 2))
@@ -38,7 +38,7 @@ test('automation setup refuses an escaping hooks symlink', async t => {
   const outside = await mkdtemp(path.join(os.tmpdir(), 'dsh-cordis-hooks-outside-'))
   t.after(() => Promise.all([rm(root, { recursive: true, force: true }), rm(outside, { recursive: true, force: true })]))
   await writeFile(path.join(root, 'package.json'), JSON.stringify({ scripts: {} }))
-  await symlink(outside, path.join(root, '.githooks'), 'dir')
+  await symlink(outside, path.join(root, '.githooks'), 'junction')
   await assert.rejects(setupAutomation(root, { git: false }), /符号链接越出项目/)
 })
 

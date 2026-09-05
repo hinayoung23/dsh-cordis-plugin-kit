@@ -8,7 +8,9 @@
 
 > 质量门可以发现已知模式和回归，但任何静态或动态工具都不能数学上保证代码绝无功能、性能或安全问题。高风险插件仍需要人工审查、真实依赖集成测试和针对业务的威胁建模。
 
-当前规范基线：DeepSeek Harness `0.1.0-rc.7`、`@deepseek-ai/cordis` `4.0.1`。
+当前兼容基线：DeepSeek Harness `0.1.2-rc.1`、`@deepseek-ai/cordis` `4.0.2`。
+
+`0.2.1` 修复 Windows 下 npm/pnpm/yarn 的 `.cmd` 启动问题及超时后的子进程清理；生成项目支持含空格和中文的路径，Git hooks 由 Git 执行并保留 LF 换行。CI 覆盖 Windows/Linux、Node.js 22/24；本包没有新增生产依赖。Windows 使用 Git hooks 需要安装 Git for Windows。运行时检查仍需要目标项目安装 `@deepseek-ai/cordis` 开发依赖。
 
 ### 功能
 
@@ -185,7 +187,9 @@ DSH Cordis Plugin Kit provides offline standards, scaffolding, and quality gates
 
 > Quality gates can detect known patterns and regressions, but no static or dynamic tool can mathematically guarantee that code is free of functional, performance, or security issues. High-risk plugins still require manual review, integration tests with real dependencies, and application-specific threat modeling.
 
-Current standards baseline: DeepSeek Harness `0.1.0-rc.7` and `@deepseek-ai/cordis` `4.0.1`.
+Current compatibility baseline: DeepSeek Harness `0.1.2-rc.1` and `@deepseek-ai/cordis` `4.0.2`.
+
+Version `0.2.1` fixes Windows npm/pnpm/yarn `.cmd` execution and timeout process-tree cleanup. Generated projects support spaces and Unicode paths; Git executes hooks with LF line endings. CI covers Windows/Linux and Node.js 22/24. No production dependencies were added. Hooks require Git for Windows; runtime checks require the target project's `@deepseek-ai/cordis` development dependency.
 
 ### Features
 

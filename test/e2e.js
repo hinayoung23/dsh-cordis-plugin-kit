@@ -9,12 +9,12 @@ import { scaffoldProject } from '../lib/scaffold.js'
 
 const kitRoot = fileURLToPath(new URL('../', import.meta.url))
 const parent = await mkdtemp(path.join(os.tmpdir(), 'dsh-cordis-kit-e2e-'))
-const target = path.join(parent, 'generated-plugin')
+const target = path.join(parent, 'generated plugin 中文')
 
 function verifyLiveWatcher(root) {
   return new Promise((resolve, reject) => {
-    const command = path.join(root, 'node_modules', '.bin', 'dsh-cordis-kit')
-    const child = spawn(command, ['watch', '.'], { cwd: root, shell: false, stdio: ['ignore', 'pipe', 'pipe'] })
+    const command = path.join(root, 'node_modules', 'dsh-cordis-plugin-kit', 'bin', 'dsh-cordis-kit.js')
+    const child = spawn(process.execPath, [command, 'watch', '.'], { cwd: root, shell: false, stdio: ['ignore', 'pipe', 'pipe'] })
     let output = ''
     let changed = false
     const timer = setTimeout(() => {
@@ -47,14 +47,14 @@ try {
   manifest.devDependencies['dsh-cordis-plugin-kit'] = `file:${kitRoot}`
   await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
 
-  const install = await runChild('pnpm', ['install', '--offline'], { cwd: target, timeoutMs: 60_000 })
+  const install = await runChild('pnpm', ['install', '--prefer-offline'], { cwd: target, timeoutMs: 60_000 })
   assert.equal(install.code, 0, install.output)
   for (const script of ['check', 'debug', 'perf', 'quality:ci']) {
     const result = await runChild('pnpm', [script], { cwd: target, timeoutMs: 60_000 })
     assert.equal(result.code, 0, `${script} failed:\n${result.output}`)
   }
   for (const hook of ['pre-commit', 'pre-push']) {
-    const result = await runChild(path.join(target, '.githooks', hook), [], { cwd: target, timeoutMs: 60_000 })
+    const result = await runChild('git', ['hook', 'run', hook], { cwd: target, timeoutMs: 60_000 })
     assert.equal(result.code, 0, `${hook} failed:\n${result.output}`)
   }
   const watchOnce = await runChild('pnpm', ['exec', 'dsh-cordis-kit', 'watch', '.', '--once'], { cwd: target, timeoutMs: 60_000 })

@@ -15,7 +15,7 @@ async function fixture(t) {
   const root = path.join(parent, 'plugin')
   await cp(goodFixture, root, { recursive: true })
   await mkdir(path.join(root, 'node_modules'), { recursive: true })
-  await symlink(path.join(kitRoot, 'node_modules/@deepseek-ai'), path.join(root, 'node_modules/@deepseek-ai'), 'dir')
+  await symlink(path.join(kitRoot, 'node_modules/@deepseek-ai'), path.join(root, 'node_modules/@deepseek-ai'), 'junction')
   return root
 }
 
@@ -42,6 +42,6 @@ test('reports reject a directory symlink that escapes the project', async t => {
   const root = await fixture(t)
   const outside = await mkdtemp(path.join(os.tmpdir(), 'dsh-cordis-report-outside-'))
   t.after(() => rm(outside, { recursive: true, force: true }))
-  await symlink(outside, path.join(root, '.cordis-kit'), 'dir')
+  await symlink(outside, path.join(root, '.cordis-kit'), 'junction')
   await assert.rejects(runQuality(root, 'save'), /符号链接越出项目/)
 })

@@ -11,7 +11,7 @@ import { scaffoldProject } from '../lib/scaffold.js'
 import { getStandards, STANDARD_VERSION } from '../lib/standards.js'
 import { watchProject } from '../lib/watch.js'
 
-const VERSION = '0.2.0'
+const VERSION = '0.2.1'
 
 const help = `dsh-cordis-kit ${VERSION}
 
